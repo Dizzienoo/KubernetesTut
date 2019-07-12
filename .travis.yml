@@ -15,3 +15,10 @@ after_success:
   - docker build -t dizzienoo/multi-nginx ./nginx
   - docker build -t dizzienoo/multi-server ./server
   - docker build -t dizzienoo/multi-worker ./worker
+#Log into Docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  - docker push dizzienoo/multi-client
+  - docker push dizzienoo/multi-nginx
+  - docker push dizzienoo/multi-server
+  - docker push dizzienoo/multi-worker
