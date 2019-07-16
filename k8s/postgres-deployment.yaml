@@ -12,12 +12,21 @@ spec:
       labels:
         component: postgres
     spec:
+      # volumes: ##Sets up the persistent volume claim for the pod
+      #   - name: postgres-storage
+      #     persistentVolumeClaim:
+      #       claimName: database-persistent-volume-claim
       containers:
       - name: postgres
-        image: postgres
+        image: postgres:11.2-alpine
         resources:
           limits:
             memory: "128Mi"
             cpu: "500m"
         ports:
         - containerPort: 5432
+        # volumeMounts: ##Mounts the storage to the pod
+        #   - name: postgres-storage
+        #     mountPath: /var/lib/postgresql/data
+        #     subPath: postgres ##postgres specific setting
+
